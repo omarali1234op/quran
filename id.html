@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>API لاستخراج تاريخ إنشاء الحساب</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            padding: 10px;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto; /* لجعل العرض في المنتصف */
+            text-align: center; /* لتوسيط العناصر داخل الحاوية */
+        }
+        h1 {
+            color: #ff6600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 18px;
+        }
+        #apiForm {
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+            text-align: center; /* توسيط العناصر داخل النموذج */
+        }
+        #apiForm:hover {
+            transform: scale(1.05);
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center; /* توسيط النص داخل النموذج */
+        }
+        input[type="text"] {
+            width: calc(100% - 16px); /* تعديل عرض الحقل ليتناسب مع التباعدات */
+            padding: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #555;
+            color: #fff;
+            font-size: 14px;
+            text-align: center; /* توسيط النص داخل الحقل */
+        }
+        button {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #e65c00;
+            transform: translateY(-3px);
+        }
+        #result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 14px;
+            width: calc(100% - 32px); /* تعديل عرض النتيجة لمطابقة التباعدات */
+            text-align: center; /* توسيط النص داخل النتيجة */
+        }
+        #footer {
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 12px;
+            text-align: center; /* توسيط النص داخل التذييل */
+        }
+        #footer a {
+            color: #ff6600;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #ff6600;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 12px;
+        }
+        #footer a:hover {
+            background-color: #ff6600;
+            color: #fff;
+        }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: twinkling 5s infinite, moveStars 10s linear infinite;
+        }
+        @keyframes twinkling {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        @keyframes moveStars {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>API لاستخراج تاريخ إنشاء الحساب</h1>
+        <form id="apiForm">
+            <label for="user_id">أدخل USER_ID:</label>
+            <input type="text" id="user_id" name="user_id" required>
+            <button type="submit">إرسال</button>
+        </form>
+        <div id="result"></div>
+        <div id="footer">
+            <p>حقوق القناة</p>
+            <a href="https://t.me/zrrrrrrrrrz" target="_blank">CH : @zrrrrrrrrrz</a>
+            <br> 
+            <p>حساب التليجرام</p>
+            <a href="https://t.me/l_b10" target="_blank">PY : @l_b10</a>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = star.style.height = Math.random() * 3 + 'px';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                starContainer.appendChild(star);
+            }
+        }
+
+        $(document).ready(function(){
+            createStars();
+
+            $('#apiForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var userId = $('#user_id').val();
+
+                $.ajax({
+                    url: 'idseit.php',  // استبدل هذا بالمسار الفعلي لملف الـAPI
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ USER_ID: userId }),
+                    success: function(response) {
+                        if(response.date) {
+                            $('#result').html('<p>تاريخ إنشاء الحساب: ' + response.date + '</p>');
+                        } else {
+                            $('#result').html('<p>خطأ: ' + response.error + '</p>');
+                        }
+                    },
+                    error: function() {
+                        $('#result').html('<p>حدث خطأ أثناء الاتصال بالـAPI.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
